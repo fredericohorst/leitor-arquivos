@@ -15,25 +15,35 @@ spark_session = SparkSession.builder \
 sqlContext = SQLContext(spark_session)
 
 # importador
-def importador_spark(diretorio, separador, sql_alias, previsualizacao):
+def importador_spark(diretorio, separador, sql_alias, previsualizacao, schema=None):
     print('serao lidos ' + str(len(os.listdir(diretorio))) + ' arquivos')
-    arquivos = diretorio + '*.csv'
-    leitor = sqlContext.read.csv(
-            arquivos,
-            sep=separador,
-            inferSchema="true",
-            header="true",
-            encoding="ISO-8859-1"
-    )
+    arquivos = diretorio + '*' #.csv'
+    if schema==None:
+        leitor = sqlContext.read.csv(
+                arquivos,
+                sep=separador,
+                inferSchema="true",
+                header="true",
+                encoding="ISO-8859-1"
+        )
+    else:
+        leitor = sqlContext.read.csv(
+                arquivos,
+                sep=separador,
+                inferSchema=False,
+                schema=schema,
+                header="true",
+                encoding="ISO-8859-1"
+        )
     leitor.registerTempTable(sql_alias)
     if previsualizacao == True: leitor.show(10) # preview da tabela
     return leitor,sql_alias
 
-def processamento_sql_spark(pasta_de_consultas,destino,diretorio, separador, sql_alias):
+def processamento_sql_spark(pasta_de_consultas,destino,diretorio, separador, sql_alias, schema=None):
     consultas = os.listdir(pasta_de_consultas)
     volume = str(len(consultas))
     # arquivos, sql_alias_r = importador_spark(diretorio=diretorio, separador=separador, sql_alias=sql_alias, previsualizacao=False)
-    importador_spark(diretorio=diretorio, separador=separador, sql_alias=sql_alias, previsualizacao=False)
+    importador_spark(diretorio=diretorio, separador=separador, sql_alias=sql_alias, previsualizacao=False, schema=schema)
     for consulta in consultas:
         print(consulta)
         f = open(pasta_de_consultas+consulta, 'r')
