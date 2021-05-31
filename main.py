@@ -24,17 +24,17 @@ arquivos_covid = destino
 # leitor.importador_spark(diretorio=arquivos_covid, separador=';', sql_alias='covid_rs', previsualizacao=True)
 
 # importacao e processamento dos arquivos salvos em um diretorio
-leitor.processamento_sql_spark(
-    pasta_de_consultas=pasta_consultas,
-    destino=pasta_destino_processados,
-    diretorio=arquivos_covid,
-    separador=';',
-    sql_alias='covid_rs'
-    )
+# leitor.processamento_sql_spark(
+#     pasta_de_consultas=pasta_consultas,
+#     destino=pasta_destino_processados,
+#     diretorio=arquivos_covid,
+#     separador=';',
+#     sql_alias='covid_rs'
+#     )
 
+# utils.downloader(download_link='/estabelecimentos_rf_urls.txt', destino='/arquivos/', lista=True)
+# print(destino)    
 
-# print(destino)
-
-
+utils.descompactando(caminho_do_arquivo='/arquivos/', tipo_arquivo='zip', destino='/arquivos/unzipped/')
 
 
