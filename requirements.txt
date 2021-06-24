@@ -1,4 +1,4 @@
 wget
 pyspark
 pandas
-zipfile
+jupyterlab

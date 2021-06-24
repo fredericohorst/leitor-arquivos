@@ -1,0 +1,18 @@
+version: "3"
+services: 
+    jupyter:
+        ports:
+            - "8888:8888"
+        # environment: 
+        volumes: 
+            - /Users/frederico/leitor-arquivos/arquivos:/arquivos
+            - /Users/frederico/leitor-arquivos/arquivos_processados:/arquivos_processados
+            - /Users/frederico/leitor-arquivos/consultas:/consultas
+        build:
+            context: .
+            dockerfile: Dockerfile-jupyter
+    # processamento:
+    #     build:
+    #         context: .
+    #         dockerfile: Dockerfile
+        

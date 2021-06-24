@@ -1,8 +1,4 @@
 
-
-
-
-
 import os 
 import utils
 import leitor
